@@ -38,12 +38,16 @@ class MainActivity : AppCompatActivity() {
         val btn = findViewById<Button>(R.id.button)
 
         btn.setOnClickListener {
-            val job: job =scope.launch {
-               for (i in 1..10) {
-                    delay(2000)
-                    txt.text = "$i"
-                }
+            val job: Job = scope.launch {
+                execute(txt)
             }
+        }
+    }
+
+    suspend fun execute(txt :TextView) {
+        for (i in 1..10) {
+            delay(2000)
+            txt.text = "$i"
         }
     }
 
